@@ -31,7 +31,8 @@ const CurrenciesList = () => {
 	}
 
 	return (
-		<ul className="dropdown-menu dropdown-menu-end bg-primary-subtle">
+		<ul className="dropdown-menu dropdown-menu-end bg-primary-subtle overflow-y-auto" 
+		style={{maxHeight:"40vh"}}>
 			{list}
 		</ul>
 	);

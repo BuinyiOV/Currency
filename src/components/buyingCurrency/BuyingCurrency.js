@@ -1,20 +1,30 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 import CurrenciesList from "../currenciesList/CurrenciesList";
 
-const BuyingCurrency = () => {
+const BuyingCurrency = ({sellRate, sellCurr}) => {
 
 	const [selected, setSelected] = useState ('Оберіть валюту');
-	const [buyCurr, setBuyCurr] = useState (null);
 	const [currLabel, setCurrLabel] = useState ('');
-	
+	const [buyRate, setBuyRate] = useState (0);
+	const [result, setResult] = useState (0);
+
+	useEffect (()=>{
+		resultCalc(sellCurr, sellRate, buyRate)
+	},[sellCurr, sellRate, buyRate])
 
 	const onSelected = (e) => {
 		if(e.target.classList.contains('dropdown-item')) {
 			setSelected(e.target.value);
-			setBuyCurr(e.target.dataset.rate);
+			setBuyRate(e.target.dataset.rate);
 			setCurrLabel(e.target.dataset.label)
 		}
+	}
+
+	const resultCalc = (a, b, c) => {
+		if ((((Number(a)) * (Number(b))) / (Number(c))) < Infinity){
+			setResult (((Number(a)) * (Number(b))) / (Number(c)))
+		};
 	}
 
 	return (
@@ -29,7 +39,9 @@ const BuyingCurrency = () => {
 						<CurrenciesList/>
 						<input type="text" 
 								className="form-control fs-3 shadow bg-light"
-								aria-label="Text input with dropdown button"/>
+								aria-label="Text input with dropdown button"
+								value={result}
+								readOnly/>
 				</div>
 				<div className="col-lg-12 mb-4 fs-5 text-capitalize" style={{height: '3vh'}}>{currLabel}</div>
 			</div>
