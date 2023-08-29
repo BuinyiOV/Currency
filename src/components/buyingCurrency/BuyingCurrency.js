@@ -2,16 +2,17 @@ import { useState } from 'react';
 
 import CurrenciesList from "../currenciesList/CurrenciesList";
 
-const SellingCurrency = () => {
+const BuyingCurrency = () => {
 
 	const [selected, setSelected] = useState ('Оберіть валюту');
-	const [sellCurr, setSellCurr] = useState (null);
-	const [currLabel, setCurrLabel] = useState ()
+	const [buyCurr, setBuyCurr] = useState (null);
+	const [currLabel, setCurrLabel] = useState ('');
+	
 
 	const onSelected = (e) => {
 		if(e.target.classList.contains('dropdown-item')) {
 			setSelected(e.target.value);
-			setSellCurr(e.target.dataset.rate);
+			setBuyCurr(e.target.dataset.rate);
 			setCurrLabel(e.target.dataset.label)
 		}
 	}
@@ -19,7 +20,7 @@ const SellingCurrency = () => {
 	return (
 		<>
 			<div className="col-lg-6 order-1">
-				<p className="fs-1 text-capitalize fw-semibold mt-4">Конвертувати</p>
+				<p className="fs-1 text-capitalize fw-semibold mt-4">Отримати</p>
 				<div className="input-group mb-3 pt-4 px-4"
 					onClick={onSelected}>
 						<button className="btn btn-primary dropdown-toggle fs-3 shadow"
@@ -36,4 +37,4 @@ const SellingCurrency = () => {
 	)
 }
 
-export default SellingCurrency;
+export default BuyingCurrency;

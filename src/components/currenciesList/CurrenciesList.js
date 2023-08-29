@@ -11,7 +11,7 @@ const CurrenciesList = () => {
 
 
 
-	if(loading) {
+	if (loading) {
 		getAllCurrences().then((values) => {
 			let sumArr = []
 			values.forEach((element) => {
@@ -19,7 +19,10 @@ const CurrenciesList = () => {
 											style={{ listStyleType: "none" }}>
 												<button className="dropdown-item fs-4 text-center" 
 												href="#" 
-												value={element.name}>{element.name}
+												value={element.codeName}
+												data-rate={element.rate}
+												data-label={element.name}>
+														{element.codeName} ({element.name})
 												</button></li>]
 				sumArr = [sumArr, ...elemArr]
 				setList([...list, ...sumArr])
@@ -28,16 +31,9 @@ const CurrenciesList = () => {
 	}
 
 	return (
-		<div className="input-group mb-3 p-4">
-			<button className="btn btn-primary dropdown-toggle fs-3 shadow"
-				type="button" data-bs-toggle="dropdown"
-				aria-expanded="false">Вибрати валюту</button>
-			<ul className="dropdown-menu dropdown-menu-end bg-primary-subtle">
-				{list}
-			</ul>
-			<input type="text" className="form-control fs-3 shadow bg-light"
-				aria-label="Text input with dropdown button"/>
-		</div>
+		<ul className="dropdown-menu dropdown-menu-end bg-primary-subtle">
+			{list}
+		</ul>
 	);
 }
 
