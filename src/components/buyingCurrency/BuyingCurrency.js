@@ -23,7 +23,7 @@ const BuyingCurrency = ({sellRate, sellCurr}) => {
 
 	const resultCalc = (a, b, c) => {
 		if ((((Number(a)) * (Number(b))) / (Number(c))) < Infinity){
-			setResult (((Number(a)) * (Number(b))) / (Number(c)))
+			setResult (Math.round((((Number(a)) * (Number(b))) / (Number(c))) * 100)/100)
 		};
 	}
 

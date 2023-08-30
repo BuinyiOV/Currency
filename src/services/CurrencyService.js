@@ -13,6 +13,10 @@ const CurrencyService = () => {
 	const getAllCurrences = async () => {
 		//return getResource(`https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange?json`);
 		const res = await getResource(`https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange?json`);
+		
+		const usdCurr = [res.find(curr => curr.cc === "USD")];
+		const eurCurr = [res.find(curr => curr.cc === "EUR")];
+		const plnCurr = [res.find(curr => curr.cc === "PLN")];
 		const uahCurr = [{
 			r030: 1,
 			txt: 'Українська гривня',
@@ -20,7 +24,19 @@ const CurrencyService = () => {
 			rate: 1,
 			exchangedate: new Date().toLocaleDateString()
 		}]
-		const allCurr = [...uahCurr, ...res];
+
+		const clippedRes = [...res];
+
+		const cutArr2 = (currency, arr) => {
+			const currIndex = (element) => (element === arr.find(curr => curr.cc === currency));
+			arr.splice((arr.findIndex(currIndex)), 1)
+		};
+
+		cutArr2("USD", clippedRes);
+		cutArr2("EUR", clippedRes);
+		cutArr2("PLN", clippedRes);
+		
+		const allCurr = [...usdCurr, ...eurCurr, ...plnCurr, ...uahCurr, ...clippedRes.sort((a, b) => a.txt.localeCompare(b.txt))];
 		
 		return allCurr.map(_transformCurrency);
 	}
