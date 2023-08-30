@@ -21,7 +21,8 @@ const CurrenciesList = () => {
 												href="#" 
 												value={element.codeName}
 												data-rate={element.rate}
-												data-label={element.name}>
+												data-label={element.name}
+												data-exchangedate={element.exchangeDate}>
 														{element.codeName} ({element.name})
 												</button></li>]
 				sumArr = [sumArr, ...elemArr]

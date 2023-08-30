@@ -1,17 +1,22 @@
 import { useState } from 'react';
 
 import CurrenciesList from "../currenciesList/CurrenciesList";
+import WideDiv from '../wideDiv/WideDiv';
 
 const SellingCurrency = ({ onChange, onClick }) => {
 
 	const [selected, setSelected] = useState ('Оберіть валюту');
-	const [currLabel, setCurrLabel] = useState ()
+	const [currLabel, setCurrLabel] = useState ();
+	const [exchangeDate, setexchangeDate] = useState ('');
+	const [exchangeDateText, setexchangeDateText] = useState ('');
 
 	const onSelected = (e) => {
 		if(e.target.classList.contains('dropdown-item')) {
 			setSelected(e.target.value);
 			setCurrLabel(e.target.dataset.label);
-			onClick(e.target.dataset.rate)
+			setexchangeDate(e.target.dataset.exchangedate);
+			setexchangeDateText('Курс встановлений на: ');
+			onClick(e.target.dataset.rate);
 		}
 	}
 
@@ -23,7 +28,8 @@ const SellingCurrency = ({ onChange, onClick }) => {
 		<>
 			<div className="col-lg-6 order-1">
 				<p className="fs-1 text-capitalize fw-semibold mt-4">Конвертувати</p>
-				<div className="input-group mb-3 pt-4 px-4"
+				<WideDiv value={currLabel}/>
+				<div className="input-group mb-3 px-4"
 					onClick={onSelected}>
 						<button className="btn btn-primary dropdown-toggle fs-3 shadow"
 									type="button" 
@@ -33,9 +39,13 @@ const SellingCurrency = ({ onChange, onClick }) => {
 						<input type="number" 
 								className="form-control fs-3 shadow bg-light"
 								aria-label="Text input with dropdown button"
-								onChange={handleChange}/>
+								onChange={handleChange}
+								style={{fontFamily: 'Roboto', fontWeight: '600'}}/>
 				</div>
-				<div className="col-lg-12 mb-4 fs-5 text-capitalize" style={{height: '3vh'}}>{currLabel}</div>
+				
+				<WideDiv 
+				filledText={exchangeDateText}
+				value={exchangeDate}/>
 			</div>
 		</>
 	)
