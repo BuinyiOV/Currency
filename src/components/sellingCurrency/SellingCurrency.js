@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-import CurrenciesList from "../currenciesList/CurrenciesList";
+import CurrenciesListNew from '../curenciesListNew/CurenciesListNew';
 import WideDiv from '../wideDiv/WideDiv';
 
 const SellingCurrency = ({ onChange, onClick }) => {
@@ -35,7 +35,7 @@ const SellingCurrency = ({ onChange, onClick }) => {
 									type="button" 
 									data-bs-toggle="dropdown"
 									aria-expanded="false">{selected}</button>
-						<CurrenciesList/>
+						<CurrenciesListNew/>
 						<input type="number" 
 								className="form-control fs-3 shadow bg-light"
 								aria-label="Text input with dropdown button"

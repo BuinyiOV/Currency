@@ -11,9 +11,8 @@ const CurrencyService = () => {
 	}
 
 	const getAllCurrences = async () => {
-		//return getResource(`https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange?json`);
+
 		const res = await getResource(`https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange?json`);
-		
 		const usdCurr = [res.find(curr => curr.cc === "USD")];
 		const eurCurr = [res.find(curr => curr.cc === "EUR")];
 		const plnCurr = [res.find(curr => curr.cc === "PLN")];
@@ -51,9 +50,9 @@ const CurrencyService = () => {
 		}
 	}
 
-	return {
-		getAllCurrences,
-	}
+	return {getAllCurrences}
 }
+
+
 
 export default CurrencyService;

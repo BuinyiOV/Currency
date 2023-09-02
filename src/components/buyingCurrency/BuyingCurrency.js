@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 
-import CurrenciesList from "../currenciesList/CurrenciesList";
+import CurrenciesListNew from '../curenciesListNew/CurenciesListNew';
 import WideDiv from '../wideDiv/WideDiv';
 
 const BuyingCurrency = ({sellRate, sellCurr}) => {
@@ -42,7 +42,7 @@ const BuyingCurrency = ({sellRate, sellCurr}) => {
 						<button className="btn btn-primary dropdown-toggle fs-3 shadow"
 									type="button" data-bs-toggle="dropdown"
 									aria-expanded="false">{selected}</button>
-						<CurrenciesList/>
+						<CurrenciesListNew/>
 						<input type="text" 
 								className="form-control fs-3 shadow bg-light"
 								aria-label="Text input with dropdown button"

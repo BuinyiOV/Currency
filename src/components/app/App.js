@@ -1,8 +1,11 @@
 import { useState, useEffect } from 'react'
 import WebFont from 'webfontloader';
 
+
+import Navbar from '../navbar/Navbar';
 import SellingCurrency from '../sellingCurrency/SellingCurrency';
 import BuyingCurrency from '../buyingCurrency/BuyingCurrency';
+import MvpCurrencies from '../mvpCurrencies/MvpCurrencies';
 
 const App = () => {
 
@@ -14,7 +17,7 @@ const App = () => {
 			google: {
 				families: ['Libre Baskerville', 'Roboto']
 			}
-		});
+		})
 	}, []);
 
 	const onSellCurr = (value) => {
@@ -30,7 +33,8 @@ const App = () => {
 	return (
 		<>
 			<div className="wrapper bg-primary bg-gradient bg-opacity-75" style={{minHeight:'100vh', fontFamily: 'Libre Baskerville'}}>
-				<div className="container text-center position-absolute top-50 start-50 translate-middle bg-primary-subtle rounded">
+				<Navbar/>
+				<div className="container text-center bg-primary-subtle rounded mb-5">
 					<div className="row">
 					<SellingCurrency onChange={onSellCurr}
 											onClick={onSellRate}/>
@@ -38,6 +42,7 @@ const App = () => {
 											sellCurr={sellCurr}/>
 					</div>
 				</div>
+				<MvpCurrencies/>
 			</div>
 		</>
 	)
