@@ -1,21 +1,21 @@
 import { useState } from 'react';
 
-import CurrenciesListNew from '../curenciesListNew/CurenciesListNew';
+import CurrenciesList from '../currenciesList/CurrenciesList';
 import WideDiv from '../wideDiv/WideDiv';
 
 const SellingCurrency = ({ onChange, onClick }) => {
 
 	const [selected, setSelected] = useState ('Оберіть валюту');
 	const [currLabel, setCurrLabel] = useState ();
-	const [exchangeDate, setexchangeDate] = useState ('');
-	const [exchangeDateText, setexchangeDateText] = useState ('');
+	const [exchangeDate, setExchangeDate] = useState ('');
+	const [exchangeDateText, setExchangeDateText] = useState ('');
 
 	const onSelected = (e) => {
 		if(e.target.classList.contains('dropdown-item')) {
 			setSelected(e.target.value);
 			setCurrLabel(e.target.dataset.label);
-			setexchangeDate(e.target.dataset.exchangedate);
-			setexchangeDateText('Курс встановлений на: ');
+			setExchangeDate(e.target.dataset.exchangedate);
+			setExchangeDateText('Курс встановлений на: ');
 			onClick(e.target.dataset.rate);
 		}
 	}
@@ -35,7 +35,7 @@ const SellingCurrency = ({ onChange, onClick }) => {
 									type="button" 
 									data-bs-toggle="dropdown"
 									aria-expanded="false">{selected}</button>
-						<CurrenciesListNew/>
+						<CurrenciesList/>
 						<input type="number" 
 								className="form-control fs-3 shadow bg-light"
 								aria-label="Text input with dropdown button"

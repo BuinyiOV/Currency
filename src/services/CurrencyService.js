@@ -21,7 +21,7 @@ const CurrencyService = () => {
 			txt: 'Українська гривня',
 			cc: 'UAH',
 			rate: 1,
-			exchangedate: new Date().toLocaleDateString()
+			exchangedate: res.find(curr => curr.cc === "USD").exchangedate
 		}]
 
 		const clippedRes = [...res];

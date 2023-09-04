@@ -7,7 +7,6 @@ import SellingCurrency from '../sellingCurrency/SellingCurrency';
 import BuyingCurrency from '../buyingCurrency/BuyingCurrency';
 
 import PriceDuringThePeriod from '../priceDuringThePeriod/PriceDuringThePeriod'
-import MvpCurrencies from '../mvpCurrencies/MvpCurrencies';
 
 const App = () => {
 
@@ -44,7 +43,6 @@ const App = () => {
 											sellCurr={sellCurr}/>
 					</div>
 				</div>
-				<MvpCurrencies/>
 				<PriceDuringThePeriod/>
 			</div>
 		</>

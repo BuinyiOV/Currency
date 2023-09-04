@@ -11,10 +11,7 @@ class Chart extends Component {
 		const options = {
 			animationEnabled: true,
 			theme: "light2",
-			title:{
-				fontFamily: "Libre Baskerville",
-				text: `${this.props.chartData}` //`${this.props.mvpCurrency.mvpCurrency}`
-			},
+
 			axisX:{
 				valueFormatString: "DD MM",
 				crosshair: {
@@ -23,12 +20,12 @@ class Chart extends Component {
 				}
 			},
 			axisY: {
-				valueFormatString: "0.00",
+				valueFormatString: "0.0000",
 				crosshair: {
 					enabled: true,
 					snapToDataPoint: true,
 					labelFormatter: function(e) {
-						return CanvasJS.formatNumber(e.value, "0.00");
+						return CanvasJS.formatNumber(e.value, "0.0000");
 					}
 				}
 			},
@@ -36,16 +33,16 @@ class Chart extends Component {
 				color: "#0d6efd",
 				type: "area",
 				xValueFormatString: "DD MMM",
-				yValueFormatString: "0.00",
+				yValueFormatString: "0.0000",
 				dataPoints: this.props.chartData
 			}]
 		}
 
 		return (
-			<div>
+			<div className='mb-5'>
 				<CanvasJSChart options = {options}
-									// mvpCurrency={this.props.mvpCurrency}
 									chartData={this.props.chartData}
+									chartName={this.props.chartName}
 									/>
 			</div>
 		);

@@ -1,5 +1,6 @@
 const CurrencyByDataService = () => {
 
+
 	const getResource = async (url) => {
 		let res = await fetch(url);
 	
@@ -12,23 +13,23 @@ const CurrencyByDataService = () => {
 
 	const getCurrencesByExchangeDate = async (curr) => {
 
-
 		let currDifferentDatesArr = []
 
 		for (let i = 0; i < 10; i++) {
 
 			const resOfDate = await getResource(`https://bank.gov.ua/NBUStatService/v1/statdirectory/exchangenew?date=${_getNeededDate(i)}&json`);
-			// const uahCurr = [{
-			// 	id: 1,
-			// 	name: 'Українська гривня',
-			// 	codeName: 'UAH',
-			// 	rate: 1,
-			// 	exchangeDate: new Date().toLocaleDateString()
-			// }]
-			const resOfDateArr = [...resOfDate.map(_transformCurrency)];
-
-			currDifferentDatesArr = [...currDifferentDatesArr, ...resOfDateArr];
+			const uahCurr = [{
+				id: 1,
+				name: 'Українська гривня',
+				codeName: 'UAH',
+				rate: 1,
+				exchangeDate: resOfDate.find(curr => curr.cc === "USD").exchangedate
+			}]
 			
+			const resOfDateArr = [...resOfDate.map(_transformCurrency)]
+			
+
+			currDifferentDatesArr = [...currDifferentDatesArr, ...resOfDateArr, ...uahCurr];			
 		}
 
 

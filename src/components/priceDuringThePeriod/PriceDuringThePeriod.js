@@ -1,63 +1,64 @@
-import { useState, useCallback, useEffect } from 'react';
+import { useState, useCallback } from 'react';
 
 import CurrencyByDataService from '../../services/CurrencyByDataService';
-import Chart from '../chart/Chart';
+
+import CurrenciesList from '../currenciesList/CurrenciesList'
+import ChartOfCurrencyByPeriod from '../chartOfCurrencyByPeriod/ChartOfCurrencyByPeriod';
 
 const PriceDuringThePeriod = () => {
 
 	const {getCurrencesByExchangeDate} = CurrencyByDataService()
-	const [currency, setCurrency] = useState([]);
+	const [allCurrencies, setAllCurrencies] = useState([]);
+	const [selectedMvp, setSelectedMvp] = useState ('UAH');
 
-const onGetCurrencesByExchangeDate = useCallback(() => {
-	getCurrencesByExchangeDate().then((values) => {
-		let sumCurrArr = [];
-		const selectedCurr = values.filter(curr => curr.codeName === "USD");
-		selectedCurr.forEach((element) => {
-			const currArr = [{x: new Date(element.exchangeDate.replace(/(\d+).(\d+).(\d+)/, '$3-$2-$1')), y: element.rate}];
-			console.log(new Date(element.exchangeDate.replace(/(\d+).(\d+).(\d+)/, '$3-$2-$1')));
+	const onSelected = (e) => {
+
+		if(e.target.classList.contains('dropdown-item')) {
+			setSelectedMvp(e.target.value);
+		}
+	}
+
+	const onGetCurrenciesByExchangeDate = useCallback(() => {
+
+		getCurrencesByExchangeDate().then((values) => {
 			
-			sumCurrArr = [...sumCurrArr, ...currArr];
-		});
+				let sumCurrArr = [];
 
-		setCurrency([...currency, ...sumCurrArr])
-})
+				values.forEach((element) => {
+					const currArr = [element];
+					sumCurrArr = [...sumCurrArr, ...currArr];
+				});
 
-
-
-}, [])
-
-return (
-	<>
-	<ChartOfCurrencyByPeriod 
-				onGetCurrencesByExchangeDate={onGetCurrencesByExchangeDate}
-				currency={currency}
-	/>
-	</>
-	
-)
-}
-
-const ChartOfCurrencyByPeriod = ({onGetCurrencesByExchangeDate, currency}) => {
-	
-	const [serviceStart, setServiceStart] = useState([]);
-	const [chartData, setChartData] = useState([]);
-
-	useEffect (() => {
-		setServiceStart(onGetCurrencesByExchangeDate());
-	}, [onGetCurrencesByExchangeDate])
-
-	useEffect (() => {
-		setChartData(currency);
-	}, [currency])
-
+				setAllCurrencies([...allCurrencies, ...sumCurrArr])
+		})
+	}, [])
 
 	return (
 		<>
-			<Chart
-					chartData={chartData}/>
-			
+		<div className="container-fluid text-center bg-primary-subtle rounded py-1">
 
+			<div className="row p-1 my-3 align-items-center">
+				<div className="col-sm-7 fs-3 text-center text-sm-end" >Зміни вартості валют протягом місяця відносно: 
+				</div>
+				<div className="dropdown col-sm-5 fs-3 text-center text-sm-start"
+					onClick={onSelected}>
+					<button className="btn btn-primary fs-4 shadow dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+						{selectedMvp}
+					</button>
+					<CurrenciesList/>
+				</div>
+			</div>
+		</div>
+
+
+
+		<ChartOfCurrencyByPeriod 
+					onGetCurrenciesByExchangeDate={onGetCurrenciesByExchangeDate}
+					allCurrencies={allCurrencies}
+					selectedMvp={selectedMvp}
+		/>
 		</>
+		
 	)
 }
 
