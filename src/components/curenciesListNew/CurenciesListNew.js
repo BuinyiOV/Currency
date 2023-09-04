@@ -4,17 +4,10 @@ import CurrencyService from '../../services/CurrencyService';
 
 const CurrenciesListNew = () => {
 
-	console.log('CurrenciesListNew');
-	
-
 	const {getAllCurrences} = CurrencyService()
 	const [list, setList] = useState([]);
 
-const onCurrencyServiceRun = useCallback(() => {getAllCurrences().then((values) => {
-
-	
-	console.log('onCurrencyServiceRun');
-	
+const onCurrencyServiceRun = useCallback(() => {getAllCurrences().then((values) => {	
 	
 	let sumArr = []
 	// console.log(sumArr);

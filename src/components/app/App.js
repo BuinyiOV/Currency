@@ -5,6 +5,8 @@ import WebFont from 'webfontloader';
 import Navbar from '../navbar/Navbar';
 import SellingCurrency from '../sellingCurrency/SellingCurrency';
 import BuyingCurrency from '../buyingCurrency/BuyingCurrency';
+
+import PriceDuringThePeriod from '../priceDuringThePeriod/PriceDuringThePeriod'
 import MvpCurrencies from '../mvpCurrencies/MvpCurrencies';
 
 const App = () => {
@@ -43,6 +45,7 @@ const App = () => {
 					</div>
 				</div>
 				<MvpCurrencies/>
+				<PriceDuringThePeriod/>
 			</div>
 		</>
 	)

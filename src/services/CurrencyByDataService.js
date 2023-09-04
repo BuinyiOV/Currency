@@ -15,10 +15,9 @@ const CurrencyByDataService = () => {
 
 		let currDifferentDatesArr = []
 
-		for (let i = 0; i < 31; i++) {
+		for (let i = 0; i < 10; i++) {
 
-			const resOfDate = await getResource(`https://bank.gov.ua/NBUStatService/v1/statdirectory/exchangenew?valcode=EUR&date=${_getNeededDate(i)}&json`);
-			
+			const resOfDate = await getResource(`https://bank.gov.ua/NBUStatService/v1/statdirectory/exchangenew?date=${_getNeededDate(i)}&json`);
 			// const uahCurr = [{
 			// 	id: 1,
 			// 	name: 'Українська гривня',
@@ -26,12 +25,12 @@ const CurrencyByDataService = () => {
 			// 	rate: 1,
 			// 	exchangeDate: new Date().toLocaleDateString()
 			// }]
-
 			const resOfDateArr = [...resOfDate.map(_transformCurrency)];
 
 			currDifferentDatesArr = [...currDifferentDatesArr, ...resOfDateArr];
 			
 		}
+
 
 		return currDifferentDatesArr;
 	}
