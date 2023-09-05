@@ -27,17 +27,17 @@ const SellingCurrency = ({ onChange, onClick }) => {
 	return (
 		<>
 			<div className="col-lg-6 order-1">
-				<p className="fs-1 text-capitalize fw-semibold mt-4">Конвертувати</p>
+				<p className="fs-2 text-capitalize fw-semibold mt-4">Конвертувати</p>
 				<WideDiv value={currLabel}/>
-				<div className="input-group mb-3 px-4"
+				<div className="input-group mb-2 px-4"
 					onClick={onSelected}>
-						<button className="btn btn-primary dropdown-toggle fs-3 shadow"
+						<button className="btn btn-primary dropdown-toggle fs-5 shadow"
 									type="button" 
 									data-bs-toggle="dropdown"
 									aria-expanded="false">{selected}</button>
 						<CurrenciesList/>
 						<input type="number" 
-								className="form-control fs-3 shadow bg-light"
+								className="form-control fs-4 shadow bg-light"
 								aria-label="Text input with dropdown button"
 								onChange={handleChange}
 								style={{fontFamily: 'Roboto', fontWeight: '600'}}/>

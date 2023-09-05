@@ -1,12 +1,13 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, Suspense, lazy } from 'react'
 import WebFont from 'webfontloader';
 
+import Spinner from '../spiner/Spinner';
 
-import Navbar from '../navbar/Navbar';
-import SellingCurrency from '../sellingCurrency/SellingCurrency';
-import BuyingCurrency from '../buyingCurrency/BuyingCurrency';
-
-import PriceDuringThePeriod from '../priceDuringThePeriod/PriceDuringThePeriod'
+const Navbar = lazy(() => import ('../navbar/Navbar'));
+const SellingCurrency = lazy(() => import ('../sellingCurrency/SellingCurrency'));
+const BuyingCurrency = lazy(() => import ('../buyingCurrency/BuyingCurrency'));
+const Modal = lazy(() => import ('../modal/modal'));
+const PriceDuringThePeriod = lazy(() => import ('../priceDuringThePeriod/PriceDuringThePeriod'))
 
 const App = () => {
 
@@ -33,18 +34,26 @@ const App = () => {
 
 	return (
 		<>
-			<div className="wrapper bg-primary bg-gradient bg-opacity-75" style={{minHeight:'100vh', fontFamily: 'Libre Baskerville'}}>
-				<Navbar/>
-				<div className="container text-center bg-primary-subtle rounded mb-5">
-					<div className="row">
-					<SellingCurrency onChange={onSellCurr}
-											onClick={onSellRate}/>
-					<BuyingCurrency sellRate={sellRate}
-											sellCurr={sellCurr}/>
+			<Suspense fallback={<Spinner/>}>
+				<div className="wrapper bg-primary bg-gradient bg-opacity-75" style={{minHeight:'100vh', fontFamily: 'Libre Baskerville'}}>
+					<Navbar/>
+					<div className="container text-center bg-primary-subtle rounded mb-5">
+						<div className="row">
+						<SellingCurrency onChange={onSellCurr}
+												onClick={onSellRate}/>
+						<BuyingCurrency sellRate={sellRate}
+												sellCurr={sellCurr}/>
+						</div>
 					</div>
+					<div className="container text-center bg-primary-subtle rounded mb-5">
+						<Modal/>
+					</div>
+					<PriceDuringThePeriod/>
+					<div className="container-fluid text-center p-4">
+						<p>Курс валют за даними Національного бану України</p>
+						<a href="https://bank.gov.ua/">bank.gov.ua</a></div>
 				</div>
-				<PriceDuringThePeriod/>
-			</div>
+			</Suspense>
 		</>
 	)
 }

@@ -37,12 +37,12 @@ const PriceDuringThePeriod = () => {
 		<>
 		<div className="container-fluid text-center bg-primary-subtle rounded py-1">
 
-			<div className="row p-1 my-3 align-items-center">
-				<div className="col-sm-7 fs-3 text-center text-sm-end" >Зміни вартості валют протягом місяця відносно: 
+			<div className="row p-2 my-2 align-items-center">
+				<div className="col-sm-7 fs-5 text-center text-sm-end" >Зміни вартості валют протягом місяця відносно: 
 				</div>
 				<div className="dropdown col-sm-5 fs-3 text-center text-sm-start"
 					onClick={onSelected}>
-					<button className="btn btn-primary fs-4 shadow dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+					<button className="btn btn-primary fs-5 shadow dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
 						{selectedMvp}
 					</button>
 					<CurrenciesList/>

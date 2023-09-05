@@ -14,7 +14,7 @@ const onCurrencyServiceRun = useCallback(() => {getAllCurrences().then((values) 
 		values.forEach((element) => {
 			const elemArr = [<li key={element.id} 
 										style={{ listStyleType: "none" }}>
-											<button className="dropdown-item fs-4 text-center" 
+											<button className="dropdown-item fs-5 text-center" 
 											href="#" 
 											value={element.codeName}
 											data-rate={element.rate}
