@@ -3,21 +3,24 @@ import WebFont from 'webfontloader';
 
 import Spinner from '../spiner/Spinner';
 
+const Lang = lazy(() => import ('../lang/Lang'))
 const Navbar = lazy(() => import ('../navbar/Navbar'));
 const SellingCurrency = lazy(() => import ('../sellingCurrency/SellingCurrency'));
 const BuyingCurrency = lazy(() => import ('../buyingCurrency/BuyingCurrency'));
 const Modal = lazy(() => import ('../modal/modal'));
 const PriceDuringThePeriod = lazy(() => import ('../priceDuringThePeriod/PriceDuringThePeriod'))
+const Footer = lazy(() => import ('../footer/Footer'))
 
 const App = () => {
 
 	const [sellCurr, setSellCurr] = useState (0);
 	const [sellRate, setSellRate] = useState (0);
+	const [language, setLanguage] = useState ('EN')
 
 	useEffect(() => {
 		WebFont.load({
 			google: {
-				families: ['Libre Baskerville', 'Roboto']
+				families: ['Lobster', 'Roboto', 'PT Sans Caption']
 			}
 		})
 	}, []);
@@ -30,30 +33,39 @@ const App = () => {
 		setSellRate(value)
 	}
 
+	const onSelectLanguage = (value) => {
+		setLanguage(value)
+	}
+
+
+
 
 
 	return (
 		<>
-			<Suspense fallback={<Spinner/>}>
-				<div className="wrapper bg-primary bg-gradient bg-opacity-75" style={{minHeight:'100vh', fontFamily: 'Libre Baskerville'}}>
-					<Navbar/>
+			<div className="wrapper bg-primary bg-gradient bg-opacity-75" style={{minHeight:'100vh', fontFamily: 'PT Sans Caption'}}>
+				<Suspense fallback={<Spinner/>}>
+					<Navbar language={language}/>
+					<Lang onClick={onSelectLanguage}/>
 					<div className="container text-center bg-primary-subtle rounded mb-5">
 						<div className="row">
 						<SellingCurrency onChange={onSellCurr}
-												onClick={onSellRate}/>
+												onClick={onSellRate}
+												language={language}/>
 						<BuyingCurrency sellRate={sellRate}
-												sellCurr={sellCurr}/>
+												sellCurr={sellCurr}
+												language={language}/>
 						</div>
 					</div>
 					<div className="container text-center bg-primary-subtle rounded mb-5">
-						<Modal/>
+						<Modal language={language}/>
 					</div>
-					<PriceDuringThePeriod/>
-					<div className="container-fluid text-center p-4">
-						<p>Курс валют за даними Національного бану України</p>
-						<a href="https://bank.gov.ua/">bank.gov.ua</a></div>
-				</div>
-			</Suspense>
+					<Suspense fallback={<Spinner/>}>
+						<PriceDuringThePeriod language={language}/>
+					</Suspense>
+					<Footer language={language}/>
+				</Suspense>
+			</div>
 		</>
 	)
 }

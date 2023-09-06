@@ -1,4 +1,4 @@
-import { useState, useEffect, Suspense } from 'react';
+import { useState, useEffect } from 'react';
 
 import ButtonCurrencySelect from '../buttonCurrencySelect/ButtonCurrencySelect';
 import Chart from '../chart/Chart';
