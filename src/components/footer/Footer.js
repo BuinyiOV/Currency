@@ -10,7 +10,7 @@ const Footer = ({language}) => {
 			text = 'Kurs walutowy według danych Narodowego Banku Ukrainy'
 			break;
 		case 'UA':
-			text = 'Курс валют за даними Національного бану України'
+			text = 'Курс валют за даними Національного банку України'
 			break;
 		default: 
 			text = 'Exchange rate according to the data of the National Bank of Ukraine'
